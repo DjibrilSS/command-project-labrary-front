@@ -1,0 +1,14 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+.header_link{
+    display: flex;
+  }
+  .header_link a{
+    margin-right: 10px;
+    color: rgb(255, 167, 5);
+    text-decoration: none;
+  }
