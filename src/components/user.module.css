@@ -1,0 +1,20 @@
+.userpage{
+    display: flex;
+    width: 800px;
+    margin: auto;
+    margin-top:100px ;
+}
+
+.user_img{
+    width: 250px;
+    margin-right: 40px;
+}
+
+.user_img img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.user_text h2{
+    margin-bottom: 30px;
+}

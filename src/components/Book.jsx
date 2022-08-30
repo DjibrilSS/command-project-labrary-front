@@ -12,9 +12,9 @@ const Book = ({item}) => {
                     <h3>{item.name}</h3>
                 </div>
                 <div className={styles.text_inner} >
-                    <p>Автор: {item.author}</p>
-                    <p>Жанр: {item.genre.nameGenre}</p>
-                    <p>Язык книги: Русский</p>
+                    <p><span>Автор</span>: {item.author}</p>
+                    <p><span>Жанр</span>: {item.genre.nameGenre}</p>
+                    <p><span>Язык книги</span>: Русский</p>
                 </div>
                 <div className={styles.btn}>
                     <button>Арендовать книгу</button>
