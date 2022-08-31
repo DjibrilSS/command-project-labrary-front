@@ -7,9 +7,8 @@ import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { fetchUsers, returnbook } from "../feauters/userSlice";
 
 const UserPage = () => {
-    const id = useSelector((state)=> state.application.id)
   const users = useSelector((state) => state.user.users);
- 
+  const id = useSelector((state)=> state.application.id)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUsers());
@@ -18,6 +17,7 @@ const UserPage = () => {
   const handleClick = (idbook)=>{
     dispatch(returnbook({id,idbook}))
     dispatch(fetchUsers())
+    
   }
 
   return users.map((item) => {

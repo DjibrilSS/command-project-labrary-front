@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "../components/book.module.css"
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
-import { arendabook } from '../feauters/userSlice';
+import { arendabook, fetchUsers } from '../feauters/userSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { fetchBooks } from '../feauters/bookSlice';
+
+
 
 const Book = ({item}) => {
     const id = useSelector((state)=> state.application.id)
+    const [text,setText] = useState(item.status ? "Книга арендована": "Арендавать книгу")
+    
+    
+   useEffect(()=>{
+    dispatch(fetchBooks())
+   },[item.status])
+    
+    
 
     const dispatch = useDispatch()
 
-    const handleClick = (idbook)=>{
+    const handleClick = (idbook,status)=>{
         dispatch(arendabook({id,idbook}))
+        setText("Книга Арендована") 
+        
+       
+        
+      
+        
     }
+  
 
     return (
         <div className={styles.bookCard}>
@@ -28,7 +46,7 @@ const Book = ({item}) => {
                     <p><span>Язык книги</span>: Русский</p>
                 </div>
                 <div className={styles.btn}>
-                    <button onClick={()=> handleClick(item._id)}>Арендовать книгу</button>
+                    <button onClick={()=> handleClick(item._id,item.status)}>{text}</button>
                 </div>
             </div>
         </div>
