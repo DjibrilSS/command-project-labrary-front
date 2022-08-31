@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { authThunk } from "../feauters/applicationSlice";
-
+import styles from "../components/sign.module.css";
 const SingUp = () => {
   const dispatch = useDispatch();
   const [login, setLogin] = useState("");
@@ -20,20 +20,20 @@ const SingUp = () => {
   };
 
   return (
-    <div>
+    <div className={styles.auth_container}>
       <input
-        placeholder="login"
+        placeholder="ЛОГИН"
         onChange={(e) => handleChange(e)}
         value={login}
         type="text"
       />
       <input
-        placeholder="password"
+        placeholder="ПАРОЛЬ"
         onChange={(e) => handleChangePas(e)}
         value={password}
         type="text"
       />
-      <button onClick={() => handleClick()}>Sing Up</button>
+      <button onClick={() => handleClick()}>РЕГИСТРАЦИЯ</button>
     </div>
   );
 };
