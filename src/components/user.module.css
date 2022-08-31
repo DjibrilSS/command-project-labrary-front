@@ -9,13 +9,13 @@
 }
 
 .user_img {
-  width: 350px;
+  width: 550px;
   margin-right: 40px;
   font-size: 40px;
 }
 
 .user_img img {
-  width: 100%;
+  width: 400px;
   border-radius: 15px;
 }
 
@@ -27,13 +27,14 @@
 }
 
 .userBookImg {
-  width: 60px;
+  width: 100px;
   display: flex;
 }
 
 .userBookImg img {
   width: 100%;
   margin-right: 20px;
+  margin-left: 10px;
 }
 .userBookImg h4 {
   font-size: 20px;
@@ -63,7 +64,7 @@
   border: 1px solid rgb(255, 111, 0);
   border-radius: 15px;
   width: 400px;
-  margin-top: 100px;
+  margin-top: 30px;
 }
 
 .read_btn {
@@ -75,4 +76,17 @@
   font-size: 18px;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.download_avatar {
+  padding: 10px;
+  background: rgb(82, 82, 82);
+  color: white;
+  border: none;
+  margin: 5px;
+}
+
+.user_img input {
+  padding: 10px;
+  border: 1px solid rgb(82, 82, 82);
 }
