@@ -1,10 +1,81 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-const initialState = {};
+import { createSlice, createAsyncThunk,current } from "@reduxjs/toolkit";
+const initialState = {
+  users:[],
+  status:null,
+  returnstatus:null
+};
+
+export const fetchUsers = createAsyncThunk(
+  "fetch/users",
+  async (_,thunkAPI)=>{
+      try {
+          const res = await fetch("http://localhost:4000/users")
+          const data = await res.json()
+          return data
+      } catch (error) {
+          return thunkAPI.rejectWithValue(error)
+      }
+  }
+)
+
+export const arendabook = createAsyncThunk(
+  "patch/book",
+  async ({ id, idbook }, thunkAPI) => {
+    try {
+      const res = await fetch(`http://localhost:4000/users/${id}`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${thunkAPI.getState().application.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rent:idbook}),
+      });
+      const data = await res.json();
+      
+      return data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+export const returnbook = createAsyncThunk(
+  "return/book",
+  async ({ id, idbook,index }, thunkAPI) => {
+    try {
+      const userId = id
+      const res = await fetch(`http://localhost:4000/users/${userId}/remove`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${thunkAPI.getState().application.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rent:idbook}),
+      });
+      const data = await res.json();
+      
+      return {index,id};
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducer: {},
-  extraReducers: () => {},
+  extraReducers: (builder) => {
+    builder
+    .addCase(arendabook.fulfilled,(state,action)=>{
+      state.status = action.payload
+    })
+    .addCase(fetchUsers.fulfilled,(state,action)=>{
+      state.users = action.payload
+      
+    })
+   
+  },
 });
 
 export default userSlice.reducer;
