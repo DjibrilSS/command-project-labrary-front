@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from "../components/book.module.css"
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
-import { arendabook } from '../feauters/userSlice';
+import { arendabook, fetchUsers } from '../feauters/userSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 
-const Book = ({item}) => {
+import { useState } from 'react';
+
+const Book = ({item,text}) => {
     const id = useSelector((state)=> state.application.id)
+    
+   
+    
+    
 
     const dispatch = useDispatch()
 
     const handleClick = (idbook)=>{
         dispatch(arendabook({id,idbook}))
+       
+        
+      
+        
     }
+  
 
     return (
         <div className={styles.bookCard}>
@@ -28,7 +39,7 @@ const Book = ({item}) => {
                     <p><span>Язык книги</span>: Русский</p>
                 </div>
                 <div className={styles.btn}>
-                    <button onClick={()=> handleClick(item._id)}>Арендовать книгу</button>
+                    <button onClick={()=> handleClick(item._id)}>{text}</button>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk,current } from "@reduxjs/toolkit";
 const initialState = {
   users:[],
-  status:null,
+  status:false,
   returnstatus:null
 };
 
@@ -68,7 +68,7 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
     .addCase(arendabook.fulfilled,(state,action)=>{
-      state.status = action.payload
+      state.status = true
     })
     .addCase(fetchUsers.fulfilled,(state,action)=>{
       state.users = action.payload
