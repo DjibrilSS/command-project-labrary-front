@@ -23,7 +23,13 @@ const Main = () => {
   }, [dispatch]);
 
   if (books.length === 0) {
-    return <div>В этом жанре пока нет книг</div>;
+    return (
+      <>
+        <Genre />
+        <br />
+        <div>В этом жанре пока нет книг</div>
+      </>
+    );
   }
 
   return (
