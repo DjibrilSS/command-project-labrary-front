@@ -3,6 +3,7 @@ const initialState = {
   error: null,
   load: false,
   token: localStorage.getItem("token"),
+  id: localStorage.getItem("id")
 };
 export const authThunk = createAsyncThunk(
   "fetch/auth",
@@ -35,8 +36,9 @@ export const loginThunk = createAsyncThunk(
         body: JSON.stringify({ login, password }),
       });
       const token = await res.json();
-      localStorage.setItem("token", token);
-      console.log(token);
+      localStorage.setItem("token", token.token);
+      localStorage.setItem("id",token.id)
+      
       return token;
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -60,7 +62,8 @@ const applicationSlice = createSlice({
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.load = false;
-        state.token = action.payload;
+        state.token = action.payload.token;
+        state.id = action.payload.id
       });
   },
 });
