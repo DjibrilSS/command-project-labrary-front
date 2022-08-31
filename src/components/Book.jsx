@@ -1,7 +1,18 @@
 import React from 'react';
 import styles from "../components/book.module.css"
+import { useDispatch } from 'react-redux/es/hooks/useDispatch';
+import { arendabook } from '../feauters/userSlice';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 const Book = ({item}) => {
+    const id = useSelector((state)=> state.application.id)
+
+    const dispatch = useDispatch()
+
+    const handleClick = (idbook)=>{
+        dispatch(arendabook({id,idbook}))
+    }
+
     return (
         <div className={styles.bookCard}>
             <div className={styles.title_img}>
@@ -17,7 +28,7 @@ const Book = ({item}) => {
                     <p><span>Язык книги</span>: Русский</p>
                 </div>
                 <div className={styles.btn}>
-                    <button>Арендовать книгу</button>
+                    <button onClick={()=> handleClick(item._id)}>Арендовать книгу</button>
                 </div>
             </div>
         </div>

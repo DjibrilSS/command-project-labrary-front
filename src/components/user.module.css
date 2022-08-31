@@ -18,3 +18,34 @@
 .user_text h2{
     margin-bottom: 30px;
 }
+
+.userBookImg{
+    width: 40px;
+    display: flex;
+}
+
+.userBookImg img{
+    width: 100%;
+    margin-right: 10px;
+}
+
+.userBookCard{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 200px;
+    margin: 30px 30px 30px 0;
+    
+}
+
+.userBookCard {
+    margin-right: 10px;
+}
+
+.userBookBtn button{
+    background-color: transparent;
+    color: red;
+    font-size: 20px;
+    border: none;
+}
