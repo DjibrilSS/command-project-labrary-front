@@ -84,7 +84,8 @@ const UserPage = () => {
                     <button onClick={()=> handleClick(i._id)}>X</button>
                 </div>
                 </div> 
-               
+                <a href={`http://localhost:4000/pdf/${i.pdf}`}><button>читать</button></a>
+                <a href={`http://localhost:4000/fb2/${i.fb2}`}><button>скачать</button></a>
                 </>
                 )
             })}</div>
