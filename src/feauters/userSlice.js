@@ -86,7 +86,7 @@ export const patchavatar = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducer: {},
+  reducers: {},
   extraReducers: (builder) => {
     builder
     .addCase(arendabook.fulfilled,(state,action)=>{

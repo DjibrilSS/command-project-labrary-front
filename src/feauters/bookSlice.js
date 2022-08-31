@@ -21,7 +21,7 @@ export const fetchBooks = createAsyncThunk(
 const bookSlice = createSlice({
   name: "book",
   initialState,
-  reducer: {},
+  reducers: {},
   extraReducers: (builder) => {
     builder
     .addCase(fetchBooks.fulfilled,(state,action)=>{

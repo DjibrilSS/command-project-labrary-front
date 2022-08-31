@@ -20,7 +20,7 @@ export const getGenre = createAsyncThunk('genre/fetch', async (_, thunkAPI)=>{
 const genreSlice = createSlice({
   name: "genre",
   initialState,
-  reducer: {},
+  reducers: {},
   extraReducers: (builder) => {
     builder
     .addCase(getGenre.fulfilled, (state, action)=>{
