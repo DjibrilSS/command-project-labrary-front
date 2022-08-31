@@ -1,18 +1,25 @@
-ul{
-    list-style: none;
-    display: flex;
-    padding: 0;
+ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-.genreDiv{
- display: flex;
- justify-content: space-around;
- width: 60%;
- margin: auto;
- background-color: white;
- box-shadow: 0 5px 30px 0 rgba(0,0,0,0.2);
+.genreDiv {
+  padding: 15px;
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+
+  margin: auto;
+  background-color: white;
+  box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.2);
+}
+
+li {
+  color: rgb(255, 111, 0);
+  font-weight: bolder;
 }
