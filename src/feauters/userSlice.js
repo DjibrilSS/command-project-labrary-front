@@ -40,7 +40,7 @@ export const arendabook = createAsyncThunk(
 );
 export const returnbook = createAsyncThunk(
   "return/book",
-  async ({ id, idbook,index }, thunkAPI) => {
+  async ({ id, idbook }, thunkAPI) => {
     try {
       const userId = id
       const res = await fetch(`http://localhost:4000/users/${userId}/remove`, {
@@ -53,7 +53,7 @@ export const returnbook = createAsyncThunk(
       });
       const data = await res.json();
       
-      return {index,id};
+      return {id};
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
