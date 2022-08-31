@@ -60,6 +60,28 @@ export const returnbook = createAsyncThunk(
   }
 );
 
+export const patchavatar = createAsyncThunk(
+  "patch/avatar",
+  async ({ id, file }, thunkAPI) => {
+    try {
+      console.log(file)
+      const res = await fetch(`http://localhost:4000/users/avatar/${id}`, {
+        method: "PATCH",
+        headers: {
+         
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ avatar:file}),
+      });
+      const data = await res.json();
+      
+      return data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
 
 const userSlice = createSlice({
   name: "user",
