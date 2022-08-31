@@ -1,14 +1,20 @@
 import React from "react";
+import axios from "axios"
 import avatar from "../components/dSxCxs3Vgzk.jpg";
 import styles from "../components/user.module.css";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { fetchUsers, returnbook } from "../feauters/userSlice";
+import { useState } from "react";
 
 const UserPage = () => {
   const users = useSelector((state) => state.user.users);
   const id = useSelector((state)=> state.application.id)
+
+  const [img, setImg] = useState(null);
+  const [file, setfile] = useState();
+  const [avatar, setAvatar] = useState(null);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUsers());
@@ -19,6 +25,28 @@ const UserPage = () => {
     dispatch(fetchUsers())
     
   }
+
+  const sendFile = React.useCallback(async (e) => {
+    e.preventDefault()
+    try {
+      const data = new FormData();
+      data.append("avatar", img);
+
+      await axios
+        .post("/api/upload", data, {
+          headers: {
+            "content-type": "mulpipart/form-data",
+          },
+        })
+
+        .then((res) => {
+          setAvatar(res.data);
+
+          setfile(res.data.originalname);
+        });
+    } catch (error) {}
+  }, [img]);
+
 
   return users.map((item) => {
     if (item._id === id) {
@@ -35,6 +63,7 @@ const UserPage = () => {
                    <div className={styles.userBookCard}> 
                 <div className={styles.userBookImg}>
                    <img src={`http://localhost:4000/images/${i.img}`} alt="" />
+                   
                    <div> <h4>{i.name}</h4></div>
                 </div>
                 
