@@ -1,51 +1,78 @@
-.userpage{
-    display: flex;
-    width: 800px;
-    margin: auto;
-    margin-top:100px ;
+.userpage {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
-.user_img{
-    width: 250px;
-    margin-right: 40px;
+.user_img {
+  width: 350px;
+  margin-right: 40px;
+  font-size: 40px;
 }
 
-.user_img img{
-    width: 100%;
-    border-radius: 10px;
+.user_img img {
+  width: 100%;
+  border-radius: 15px;
 }
 
-.user_text h2{
-    margin-bottom: 30px;
+.user_text {
+  width: 300px;
+}
+.user_text h2 {
+  margin-bottom: 50px;
 }
 
-.userBookImg{
-    width: 40px;
-    display: flex;
+.userBookImg {
+  width: 60px;
+  display: flex;
 }
 
-.userBookImg img{
-    width: 100%;
-    margin-right: 10px;
+.userBookImg img {
+  width: 100%;
+  margin-right: 20px;
 }
-
-.userBookCard{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 200px;
-    margin: 30px 30px 30px 0;
-    
+.userBookImg h4 {
+  font-size: 20px;
 }
 
 .userBookCard {
-    margin-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 15px 0;
 }
 
-.userBookBtn button{
-    background-color: transparent;
-    color: red;
-    font-size: 20px;
-    border: none;
+.userBookCard {
+  margin-right: 10px;
+}
+
+.userBookBtn button {
+  background-color: transparent;
+  color: red;
+  font-size: 20px;
+  border: none;
+}
+
+.rent_list {
+  padding: 15px;
+  border: 1px solid rgb(255, 111, 0);
+  border-radius: 15px;
+  width: 400px;
+  margin-top: 100px;
+}
+
+.read_btn {
+  padding: 8px 30px;
+  margin: 10px;
+  border: none;
+  background: rgb(255, 112, 0);
+  color: white;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
 }

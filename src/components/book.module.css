@@ -5,20 +5,20 @@
 .bookCard {
   border-radius: 8px;
   display: flex;
-  margin: 20px 20px 0 15px;
+  margin: 3% 1%;
   padding: 15px;
   -webkit-box-shadow: 0px 5px 28px 13px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 28px 13px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 28px 13px rgba(34, 60, 80, 0.2);
   position: relative;
   min-width: 400px;
-  width: 40%;
+  width: 31%;
   height: 270px;
 }
 
 .bookCard:hover {
   transform: scale(1.1);
-  transition: 0.3s;
+  transition: 0.8s;
 }
 
 .title_img img {
@@ -51,7 +51,7 @@
 
 .btn button:hover {
   transform: scale(1.1);
-  transition: 0.5s;
+  transition: 0.3s;
 }
 
 .text_block {

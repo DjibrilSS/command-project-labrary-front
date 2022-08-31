@@ -1,4 +1,5 @@
-.main_block{
-    display: flex;
-    flex-wrap: wrap;
+.main_block {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
