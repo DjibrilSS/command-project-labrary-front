@@ -7,7 +7,8 @@ import { fetchBooks } from '../feauters/bookSlice';
 
 
 
-const Book = ({item}) => {
+const Book = ({item,key}) => {
+   
     const id = useSelector((state)=> state.application.id)
     const [text,setText] = useState(item.status ? "Книга арендована": "Арендавать книгу")
     
@@ -32,7 +33,7 @@ const Book = ({item}) => {
   
 
     return (
-        <div className={styles.bookCard}>
+        <div  className={styles.bookCard}>
             <div className={styles.title_img}>
                 <img src={`http://localhost:4000/images/${item.img}`} alt="" />
             </div>

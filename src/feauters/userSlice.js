@@ -1,22 +1,23 @@
-import { createSlice, createAsyncThunk,current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 const initialState = {
-  users:[],
-  status:false,
-  returnstatus:null
+  users: [],
+  status: false,
+  returnstatus: null,
 };
+
 
 export const fetchUsers = createAsyncThunk(
   "fetch/users",
-  async (_,thunkAPI)=>{
-      try {
-          const res = await fetch("http://localhost:4000/users")
-          const data = await res.json()
-          return data
-      } catch (error) {
-          return thunkAPI.rejectWithValue(error)
-      }
+  async (_, thunkAPI) => {
+    try {
+      const res = await fetch("http://localhost:4000/users");
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-)
+);
 
 export const arendabook = createAsyncThunk(
   "patch/book",
@@ -28,10 +29,10 @@ export const arendabook = createAsyncThunk(
           Authorization: `Bearer ${thunkAPI.getState().application.token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ rent:idbook}),
+        body: JSON.stringify({ rent: idbook }),
       });
       const data = await res.json();
-      
+
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -40,20 +41,20 @@ export const arendabook = createAsyncThunk(
 );
 export const returnbook = createAsyncThunk(
   "return/book",
-  async ({ id, idbook }, thunkAPI) => {
+  async ({ id, bookId }, thunkAPI) => {
     try {
-      const userId = id
-      const res = await fetch(`http://localhost:4000/users/${userId}/remove`, {
+
+      const res = await fetch(`http://localhost:4000/users/${id}/remove`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${thunkAPI.getState().application.token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ rent:idbook}),
+        body: JSON.stringify({ rent: bookId }),
       });
       const data = await res.json();
-      
-      return {id};
+
+      return { id, bookId };
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
@@ -64,17 +65,16 @@ export const patchavatar = createAsyncThunk(
   "patch/avatar",
   async ({ id, file }, thunkAPI) => {
     try {
-      console.log(file)
+      console.log(file);
       const res = await fetch(`http://localhost:4000/users/avatar/${id}`, {
         method: "PATCH",
         headers: {
-         
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ avatar:file}),
+        body: JSON.stringify({ avatar: file }),
       });
       const data = await res.json();
-      
+
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -82,22 +82,37 @@ export const patchavatar = createAsyncThunk(
   }
 );
 
-
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-    .addCase(arendabook.fulfilled,(state,action)=>{
-      state.status = true
-    })
-    .addCase(fetchUsers.fulfilled,(state,action)=>{
-      state.users = action.payload
-      
-    })
+  reducers: {
    
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(arendabook.fulfilled, (state, action) => {
+        state.status = true;
+      })
+
+      .addCase(returnbook.fulfilled,(state,action)=>{
+        state.users = state.users.map((item) => {
+          if (item._id === action.payload.id) {
+            return {
+              ...item,
+              rent: item.rent.filter((book) => {
+                  return book._id !== action.payload.bookId
+              })
+            }
+          }
+          return item;
+        });
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.users = action.payload;
+      });
+  },
 });
+
+export const { deletebook } = userSlice.actions;
 
 export default userSlice.reducer;

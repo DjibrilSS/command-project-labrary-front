@@ -6,21 +6,26 @@ import { useSelector } from "react-redux/es/exports";
 import Book from "./Book";
 import Genre from "./Genre";
 import { useParams } from "react-router-dom";
-
+import { filterBook } from "../feauters/bookSlice";
 const Main = () => {
-  let books = useSelector((state) => state.book.books);
-  const bookId = useParams();
-  console.log(bookId);
-  if (bookId.id) {
-    books = books.filter((item) => {
-      return item.genre._id === bookId.id;
+  const bookfilter = useSelector((state) => state.book.bookfilter);
+  const books = useSelector((state)=> state.book.books)
+  const {id} = useParams();
+ 
+
+ 
+   const books1 = bookfilter.filter((item) => {
+      if(!id){
+        return true
+      }
+      return item.genre._id === id
     });
-  }
+  
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchBooks());
-  }, [dispatch]);
+    dispatch(fetchBooks())
+  }, []);
 
   if (books.length === 0) {
     return (
@@ -36,8 +41,8 @@ const Main = () => {
     <>
       <Genre />
       <div className={styles.main_block}>
-        {books.map((item) => {
-          return <Book item={item} />;
+        {books1.map((item,index) => {
+          return <div key={index}><Book item={item} />;</div>
         })}
       </div>
     </>

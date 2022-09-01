@@ -19,9 +19,9 @@ const UserPage = () => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  const handleClick = (idbook) => {
-    dispatch(returnbook({ id, idbook }));
-    dispatch(fetchUsers());
+  const handleClick = (bookId) => {
+    dispatch(returnbook({ id, bookId }));
+   
   };
 
   const sendFile = React.useCallback(
@@ -49,10 +49,10 @@ const UserPage = () => {
     [img]
   );
 
-  return users.map((item) => {
+  return users.map((item,index) => {
     if (item._id === id) {
       return (
-        <div className={styles.userpage}>
+        <div key={index} className={styles.userpage}>
           <div className={styles.user_img}>
             <h2>{item.login}</h2>
             {avatar1 ? (
@@ -79,9 +79,9 @@ const UserPage = () => {
           </div>
           <div className={styles.user_text}>
             <div>
-              {item.rent.map((i) => {
+              {item.rent.map((i,index) => {
                 return (
-                  <div className={styles.rent_list}>
+                  <div key={index} className={styles.rent_list}>
                     <div className={styles.userBookCard}>
                       <div className={styles.userBookImg}>
                         <img
