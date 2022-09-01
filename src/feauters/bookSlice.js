@@ -1,7 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction } from "@reduxjs/toolkit";
 const initialState = {
-  books:[]
+  books:[],
+  bookfilter:[]
+
 };
+
 
 export const fetchBooks = createAsyncThunk(
   "fetch/books",
@@ -21,13 +25,29 @@ export const fetchBooks = createAsyncThunk(
 const bookSlice = createSlice({
   name: "book",
   initialState,
-  reducers: {},
+  reducers: {
+    filterBook: (state,action)=>{
+      state.bookfilter = state.books.filter((item)=>{
+      
+        
+         return item.name.toLowerCase().includes(action.payload.toLowerCase().toString())
+      }
+      )
+    },
+  
+  },
   extraReducers: (builder) => {
     builder
     .addCase(fetchBooks.fulfilled,(state,action)=>{
       state.books = action.payload
+     if(state.bookfilter.length < 1){
+      state.bookfilter = action.payload
+     }
+      
     })
   },
 });
+
+export const {filterBook} = bookSlice.actions
 
 export default bookSlice.reducer;

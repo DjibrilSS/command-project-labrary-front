@@ -16,15 +16,17 @@ const Genre = () => {
 
   return (
     <div className={styles.genreDiv}>
-      {genre.map((item) => {
+      {genre.map((item,index) => {
         return (
-          <Link to={`/genre/${item._id}`}>
+          <div key={index}>
+            <Link to={`/genre/${item._id}`}>
             <div key={item._id}>
               <ul>
                 <li>{item.nameGenre}</li>
               </ul>
             </div>
           </Link>
+          </div>
         );
       })}
     </div>
