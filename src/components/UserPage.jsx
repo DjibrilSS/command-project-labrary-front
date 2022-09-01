@@ -6,10 +6,12 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { fetchUsers, patchavatar, returnbook } from "../feauters/userSlice";
 import { useState } from "react";
+import { updatestatus } from "../feauters/bookSlice";
 
 const UserPage = () => {
   const users = useSelector((state) => state.user.users);
   const id = useSelector((state) => state.application.id);
+
 
   const [img, setImg] = useState(null);
   const [file, setfile] = useState();
@@ -19,8 +21,9 @@ const UserPage = () => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  const handleClick = (bookId) => {
-    dispatch(returnbook({ id, bookId }));
+  const handleClick = (idbook) => {
+    dispatch(returnbook({ id, idbook }));
+    dispatch(updatestatus(idbook))
    
   };
 

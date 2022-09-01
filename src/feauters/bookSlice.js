@@ -34,6 +34,17 @@ const bookSlice = createSlice({
       }
       )
     },
+    updatestatus: (state,action)=>{
+      state.bookfilter = state.bookfilter.map((item) => {
+        if (item._id === action.payload) {
+          return {
+            ...item,
+            status: !item.status
+          }
+        }
+        return item;
+      });
+    }
   
   },
   extraReducers: (builder) => {
@@ -48,6 +59,6 @@ const bookSlice = createSlice({
   },
 });
 
-export const {filterBook} = bookSlice.actions
+export const {filterBook,updatestatus} = bookSlice.actions
 
 export default bookSlice.reducer;
