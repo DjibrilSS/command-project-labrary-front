@@ -41,7 +41,7 @@ export const arendabook = createAsyncThunk(
 );
 export const returnbook = createAsyncThunk(
   "return/book",
-  async ({ id, bookId }, thunkAPI) => {
+  async ({ id, idbook }, thunkAPI) => {
     try {
 
       const res = await fetch(`http://localhost:4000/users/${id}/remove`, {
@@ -50,11 +50,11 @@ export const returnbook = createAsyncThunk(
           Authorization: `Bearer ${thunkAPI.getState().application.token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ rent: bookId }),
+        body: JSON.stringify({ rent: idbook }),
       });
       const data = await res.json();
 
-      return { id, bookId };
+      return { id, idbook };
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
@@ -86,7 +86,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-   
+    
   },
   extraReducers: (builder) => {
     builder
@@ -100,7 +100,7 @@ const userSlice = createSlice({
             return {
               ...item,
               rent: item.rent.filter((book) => {
-                  return book._id !== action.payload.bookId
+                  return book._id !== action.payload.idbook
               })
             }
           }
@@ -113,6 +113,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { deletebook } = userSlice.actions;
+
 
 export default userSlice.reducer;

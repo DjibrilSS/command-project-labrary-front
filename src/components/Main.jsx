@@ -42,7 +42,7 @@ const Main = () => {
       <Genre />
       <div className={styles.main_block}>
         {books1.map((item,index) => {
-          return <div key={index}><Book item={item} />;</div>
+          return <> <Book item={item} /></>
         })}
       </div>
     </>
