@@ -5,6 +5,7 @@ import { arendabook, fetchUsers } from "../feauters/userSlice";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { fetchBooks } from "../feauters/bookSlice";
 import { updatestatus } from "../feauters/bookSlice";
+import { addbooks } from "../feauters/userSlice";
 
 const Book = ({ item }) => {
   const token = useSelector((state) => state.application.token);
@@ -14,15 +15,14 @@ const Book = ({ item }) => {
     item.status ? "Книга арендована" : "Арендавать книгу"
   );
 
-  useEffect(() => {
-    dispatch(fetchBooks());
-  }, [item.status]);
+ 
 
   const dispatch = useDispatch();
 
   const handleClick = (idbook, status) => {
     dispatch(arendabook({ id, idbook }));
     dispatch(updatestatus(idbook));
+    dispatch(addbooks({idbook}))
 
     setText("Книга Арендована");
   };

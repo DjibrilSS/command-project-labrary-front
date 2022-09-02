@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 const initialState = {
   users: [],
   status: false,
+  rentbooks:[],
   returnstatus: null,
 };
 
@@ -13,6 +14,19 @@ export const fetchUsers = createAsyncThunk(
       const res = await fetch("http://localhost:4000/users");
       const data = await res.json();
       return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const fetchUsersid = createAsyncThunk(
+  "fetch/usersid",
+  async (id, thunkAPI) => {
+    try {
+      const res = await fetch(`http://localhost:4000/users/${id}`);
+      const data = await res.json();
+      return data.rent;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -86,12 +100,33 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    addbooks: (state,action)=>{
+      state.users = state.users.map((item) => {
+          if (item._id === action.payload.id) {
+            return {
+              ...item,
+              rent: item.rent.filter((book) => {
+                  return book._id !== action.payload.idbook
+              })
+            }
+          }
+          return item;
+        });
+    },
+    deletebooks: (state,action)=>{
+      state.rentbooks.pop(action.payload)
+    }
     
   },
   extraReducers: (builder) => {
     builder
       .addCase(arendabook.fulfilled, (state, action) => {
         state.status = true;
+        state.rentbooks.unshift(action.payload)
+      })
+
+      .addCase(fetchUsersid.fulfilled,(state,action)=>{
+        state.rentbooks = action.payload
       })
 
       .addCase(returnbook.fulfilled,(state,action)=>{
@@ -114,5 +149,6 @@ const userSlice = createSlice({
 });
 
 
+export const {addbooks,deletebooks} = userSlice.actions
 
 export default userSlice.reducer;

@@ -7,9 +7,11 @@ import Book from "./Book";
 import Genre from "./Genre";
 import { useParams } from "react-router-dom";
 import { filterBook } from "../feauters/bookSlice";
+import { fetchUsersid } from "../feauters/userSlice";
 const Main = () => {
   const bookfilter = useSelector((state) => state.book.bookfilter);
   const books = useSelector((state)=> state.book.books)
+  const idUser = useSelector((state)=> state.application.id)
   const {id} = useParams();
  
 
@@ -25,6 +27,7 @@ const Main = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchBooks())
+    dispatch(fetchUsersid(idUser))
   }, []);
 
   if (books.length === 0) {
