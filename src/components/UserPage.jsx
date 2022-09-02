@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { fetchUsers, patchavatar, returnbook } from "../feauters/userSlice";
 import { useState } from "react";
 import { updatestatus } from "../feauters/bookSlice";
+import { deletebooks } from "../feauters/userSlice";
 
 const UserPage = () => {
   const users = useSelector((state) => state.user.users);
@@ -24,6 +25,7 @@ const UserPage = () => {
   const handleClick = (idbook) => {
     dispatch(returnbook({ id, idbook }));
     dispatch(updatestatus(idbook))
+    dispatch(deletebooks(idbook))
    
   };
 
