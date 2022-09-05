@@ -13,6 +13,7 @@ const Main = () => {
   const books = useSelector((state)=> state.book.books)
   const idUser = useSelector((state)=> state.application.id)
   const {id} = useParams();
+  const loader = useSelector((state)=> state.book.loading)
  
 
  
@@ -45,7 +46,7 @@ const Main = () => {
       <Genre />
       <div className={styles.main_block}>
         {books1.map((item,index) => {
-          return <> <Book item={item} /></>
+          return <> <Book key={index} item={item} /></>
         })}
       </div>
     </>

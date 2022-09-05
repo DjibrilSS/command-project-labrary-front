@@ -78,9 +78,18 @@ form:hover .fa {
 .header_link {
   display: flex;
   font-weight: 900;
+  align-items: center;
 }
 .header_link a {
   margin-right: 10px;
   color: rgb(255, 167, 5);
   text-decoration: none;
+  
+}
+.icon svg{
+  width: 50px;
+}
+
+.avatar_header{
+  margin-left: 10px;
 }
