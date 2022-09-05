@@ -10,10 +10,12 @@ import { addbooks } from "../feauters/userSlice";
 const Book = ({ item }) => {
   const token = useSelector((state) => state.application.token);
   const id = useSelector((state) => state.application.id);
+  const rentbooks = useSelector((state)=> state.user.rentbooks)
 
   const [text, setText] = useState(
     item.status ? "Книга арендована" : "Арендавать книгу"
   );
+  
 
  
 
@@ -41,7 +43,7 @@ const Book = ({ item }) => {
             <span>Автор</span>: {item.author}
           </p>
           <p>
-            <span>Жанр</span>: {item.genre.nameGenre} {item.status.toString()}
+            <span>Жанр</span>: {item.genre.nameGenre} 
           </p>
 
           <p>
@@ -51,7 +53,7 @@ const Book = ({ item }) => {
         {token ? (
           <div className={item.status ? styles.btn_select : styles.btn}>
             <button
-              disabled={item.status ? true : false}
+              disabled={item.status || rentbooks.length > 2  ? true : false}
               onClick={() => handleClick(item._id, item.status)}
             >
               {text}

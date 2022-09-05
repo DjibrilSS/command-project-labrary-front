@@ -6,32 +6,30 @@ import { filterBook } from "../feauters/bookSlice";
 import { useSelector } from "react-redux/es/exports";
 import { useDispatch } from "react-redux/es/exports";
 import { fetchBooks } from "../feauters/bookSlice";
+import { FcImport } from "react-icons/fc";
 import SimpleBadge from "./SimpleBadge";
+import { Avatar } from "@mui/material";
 import { fetchUsers } from "../feauters/userSlice";
 const Header = () => {
-  const id = useSelector((state)=> state.application.id)
-  const dispatch = useDispatch()
-  const [value,setValue]=useState("")
+
+  const user = useSelector((state)=> state.user.users)
+  const id = useSelector((state) => state.application.id);
+  const dispatch = useDispatch();
+  const [value, setValue] = useState("");
   const token = useSelector((state) => state.application.token);
-  const rentbooks = useSelector((state)=> state.user.rentbooks)
+  const rentbooks = useSelector((state) => state.user.rentbooks);
   const handleClick = () => {
     localStorage.clear();
     window.location.reload();
   };
 
- 
+  useEffect(() => {
+    dispatch(filterBook(value));
+  }, [value]);
 
-  
-  
-
-useEffect(()=>{
-  dispatch(filterBook(value))
-},[value])
-
-useEffect(()=>{
-  dispatch(fetchUsers())
-},[])
-
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
 
   return (
     <div className={styles.header}>
@@ -44,7 +42,16 @@ useEffect(()=>{
             </Link>
             <Link to="/lk">Личный кабинет</Link>
             <SimpleBadge length={rentbooks.length} />
-
+           {user.map((item)=>{
+            if(item._id === id){
+              return  <Avatar
+              className={styles.avatar_header}
+              alt={item.name}
+              src={`http://localhost:4000/images/${item.avatar}`}
+              sx={{ width: 40, height: 40 }}
+            />
+            }
+           })}
           </>
         ) : (
           <>
@@ -62,7 +69,12 @@ useEffect(()=>{
       </div>
       <div>
         <form action="">
-          <input onChange={(e)=> setValue(e.target.value)} value={value} className={styles.search} type="search" />
+          <input
+            onChange={(e) => setValue(e.target.value)}
+            value={value}
+            className={styles.search}
+            type="search"
+          />
           <i className="fa fa-search"></i>
         </form>
       </div>

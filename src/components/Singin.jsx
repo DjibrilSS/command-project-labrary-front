@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginThunk } from "../feauters/applicationSlice";
 import styles from "../components/sign.module.css";
 import { TailSpin } from "react-loader-spinner";
+import { Alert } from "@mui/material";
+import BasicAlerts from "./BasicAlert";
 
 const Singin = () => {
   const dispatch = useDispatch();
@@ -18,9 +20,11 @@ const Singin = () => {
     setPassword(e.target.value);
   };
   const handleClick = (e) => {
+    
     setLogin("");
     setPassword("");
     dispatch(loginThunk({ login, password }));
+    window.location.reload()
   };
 
   return (
@@ -37,7 +41,7 @@ const Singin = () => {
         value={password}
         type="text"
       />
-      <div className={styles.error}>{err? err.toString() : null}</div>
+      <div className={styles.error}>{err? <BasicAlerts  text = {err.toString()} /> : null}</div>
       <button onClick={() => handleClick()}>
       {loader ? 
                 <TailSpin 
