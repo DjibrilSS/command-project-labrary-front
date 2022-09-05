@@ -32,6 +32,7 @@ function App() {
         <Route path="/lk" element={<UserPage />} />
         <Route path="/auth" element={<SignUp />} />
         <Route path="/login" element={<SignIn />} />
+        <Route path="/genre/:id" element={<Main />} />
       </Routes>
     </div>
   );
